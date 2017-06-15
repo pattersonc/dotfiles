@@ -1,0 +1,63 @@
+Host pattersonc.no-ip.org
+ Port 80
+ # HTTP proxy tunnel
+ LocalForward localhost:8080 localhost:8080
+ # HTTPS proxy tunnel
+ LocalForward localhost:8081 localhost:8081
+ # SOCKS proxy tunnel
+ DynamicForward localhost:1080
+ # RDP tunnel
+ LocalForward localhost:8082 localhost:3389
+ # Ubuntu RDP tunnel
+ LocalForward localhost:8083 localhost:6666
+ # ssh ubuntu-jenks
+ LocalForward localhost:8084 localhost:2222
+ # jenkins
+ LocalForward localhost:8085 localhost:8888
+
+ # Rails app testing from IE
+ RemoteForward localhost:3001 localhost:3001
+ 
+
+Host chris-imac.acponline.org
+ Port 22
+ DynamicForward 127.0.0.1:1081
+ user chris
+ ProxyCommand none
+ 
+Host yoda.celerify.com
+ user root
+ ProxyCommand /usr/bin/nc -x localhost:1080 %h %p
+
+Host linode.celerify.com
+ user root
+ ProxyCommand /usr/bin/nc -x localhost:1080 %h %p
+
+Host hostgator.celerify.com
+ Port 2222
+ User patterc1
+ ProxyCommand /usr/bin/nc -x localhost:1080 %h %p
+
+Host seagearmarine.com
+ Port 22
+ User seagear
+ ProxyCommand /usr/bin/nc -x localhost:1080 %h %p
+
+#################################################
+#ACP 
+
+Host *.acponline.org
+ User chrisp
+ ProxyCommand /usr/bin/nc -x localhost:1081 %h %p
+
+Host github.com 
+ ProxyCommand /usr/bin/nc -x localhost:1081 %h %p
+# END
+
+
+Host rubygems.org
+# ProxyCommand /usr/bin/nc -x localhost:1081 %h %p
+#
+
+Host singlestravelservice.com
+ User singlfb4
